@@ -1,0 +1,204 @@
+{% load static %}
+<div class="featured-product-area section-padding">
+    <h2 class="section-title">FEATURED PRODUCTS</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tab-menu">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="first-item active">
+                            <a href="#arrival" aria-controls="arrival" role="tab" data-toggle="tab">New Arrival</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#sale" aria-controls="sale" role="tab" data-toggle="tab">BEST SELLERS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="product-list tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="arrival">
+                    <div class="featured-product-list indicator-style">
+                        {% if book_list %}
+                            {% for book in book_list %}
+                                {% if book.book_new_arrival %}
+                                    <div class="single-p-banner">
+                                        <div class="col-md-3">
+                                            <div class="single-banner">
+                                                <div class="product-wrapper">
+                                                    <a href="#" class="single-banner-image-wrapper">
+                                                        <img alt="{{ book.book_slug }}" src="{{ book.book_image }}">
+                                                        <div class="price"><span>$</span>{{ book.book_price }}</div>
+                                                        <div class="rating-icon">
+                                                            {% for rating in book.r %}
+                                                                <i class="fa fa-star icolor"></i>
+                                                            {% endfor %}
+                                                            {% for foo in book.n %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+
+                                                        </div>
+                                                    </a>
+                                                    <div class="product-description">
+                                                        <div class="functional-buttons">
+                                                            <a href="#" title="Add to Cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                            <a href="#" title="Add to Wishlist">
+                                                                <i class="fa fa-heart-o"></i>
+                                                            </a>
+                                                            <a href="#" id="{{ forloop.counter }}" title="Quick view"
+                                                               data-toggle="modal"
+                                                               onclick="showPopup('{{ book.book_slug }}')">
+                                                                <i class="fa fa-compress"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="banner-bottom text-center">
+                                                    <a style="cursor: pointer"
+                                                       href="{% url 'books:individual-book' book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="single-banner">
+                                                <div class="product-wrapper">
+                                                    <a href="#" class="single-banner-image-wrapper">
+                                                        <img alt="{{ book.book_slug }}" src="{{ book.book_image }}">
+                                                        <div class="price"><span>$</span>{{ book.book_price }}</div>
+                                                        <div class="rating-icon">
+                                                            {% for rating in book.r %}
+                                                                <i class="fa fa-star icolor"></i>
+                                                            {% endfor %}
+                                                            {% for foo in book.n %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+
+                                                        </div>
+                                                    </a>
+                                                    <div class="product-description">
+                                                        <div class="functional-buttons">
+                                                            <a href="#" title="Add to Cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                            <a href="#" title="Add to Wishlist">
+                                                                <i class="fa fa-heart-o"></i>
+                                                            </a>
+                                                            <a href="#" id="{{ forloop.counter }}" title="Quick view"
+                                                               data-toggle="modal"
+                                                               onclick="showPopup('{{ book.book_slug }}')">
+                                                                <i class="fa fa-compress"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="banner-bottom text-center">
+                                                    <a style="cursor: pointer"
+                                                       href="{% url 'books:individual-book' book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="sale">
+                    <div class="featured-product-list indicator-style">
+                        {% if book_list %}
+                            {% for book in book_list %}
+                                {% if book.book_best_seller %}
+                                    <div class="single-p-banner">
+                                        <div class="col-md-3">
+                                            <div class="single-banner">
+                                                <div class="product-wrapper">
+                                                    <a href="#" class="single-banner-image-wrapper">
+                                                        <img alt="{{ book.book_slug }}"
+                                                             src="{{ book.book_image }}">
+                                                        <div class="price"><span>$</span>{{ book.book_price }}
+                                                        </div>
+                                                        <div class="rating-icon">
+                                                            {% for rating in book.r %}
+                                                                <i class="fa fa-star icolor"></i>
+                                                            {% endfor %}
+                                                            {% for foo in book.n %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+
+                                                        </div>
+                                                    </a>
+                                                    <div class="product-description">
+                                                        <div class="functional-buttons">
+                                                            <a href="#" title="Add to Cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                            <a href="#" title="Add to Wishlist">
+                                                                <i class="fa fa-heart-o"></i>
+                                                            </a>
+                                                            <a href="#" id="{{ forloop.counter }}" title="Quick view"
+                                                               data-toggle="modal"
+                                                               onclick="showPopup('{{ book.book_slug }}')">
+                                                                <i class="fa fa-compress"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="banner-bottom text-center">
+                                                    <a style="cursor: pointer"
+                                                       href="{% url 'books:individual-book' book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="single-banner">
+                                                <div class="product-wrapper">
+                                                    <a href="#" class="single-banner-image-wrapper">
+                                                        <img alt="{{ book.book_slug }}" src="{{ book.book_image }}">
+                                                        <div class="price"><span>$</span>{{ book.book_price }}</div>
+                                                        <div class="rating-icon">
+                                                            {% for rating in book.r %}
+                                                                <i class="fa fa-star icolor"></i>
+                                                            {% endfor %}
+                                                            {% for foo in book.n %}
+                                                                <i class="fa fa-star"></i>
+                                                            {% endfor %}
+
+                                                        </div>
+                                                    </a>
+                                                    <div class="product-description">
+                                                        <div class="functional-buttons">
+                                                            <a href="#" title="Add to Cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </a>
+                                                            <a href="#" title="Add to Wishlist">
+                                                                <i class="fa fa-heart-o"></i>
+                                                            </a>
+                                                            <a href="#" id="{{ forloop.counter }}" title="Quick view"
+                                                               data-toggle="modal"
+                                                               onclick="showPopup('{{ book.book_slug }}')">
+                                                                <i class="fa fa-compress"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="banner-bottom text-center">
+                                                    <a style="cursor: pointer"
+                                                       href="{% url 'books:individual-book'  book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="breadcrumbs-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumbs">
+                        <h2>LOGIN/REGISTER</h2>
+                        <ul class="breadcrumbs-list">
+                            <li>
+                                <a title="Return to Home" href="{% url 'books:home' %}">Home</a>
+                            </li>
+                            <li>Login</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <br/>
+        <div class="row">
+            <div class="col">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Sign Up Here</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Register</button>
+                        <div class="border-top pt-3 text-center">
+                            <p class="small text-muted"><a href="{% url "account:login" %}"
+                                                           class="ml-2">Already have an Account ? Sign
+                                in</a></p>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Online Book Store</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'all_css.html' %}
+    <style>
+        .asteriskField {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<!-- Add your site or application content here -->
+<!--Header Area Start-->
+{% include 'header.html' %}
+{% include 'mobile_menu.html' %}
+
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer Area Start -->
+{% include 'footer.html' %}
+<!-- Footer Area End -->
+<!--Quickview Product Start -->
+<div id="quickview-wrapper"></div>
+<!--End of Quickview Product-->
+<!-- all js here -->
+<!-- jquery latest version -->
+{% include 'all_script.html' %}
+</body>
+</html>

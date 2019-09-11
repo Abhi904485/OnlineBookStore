@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% include 'slider.html' %}
+    <!-- slider Area End-->
+    <!-- Online Banner Area Start -->
+    {% include 'online_banner.html' %}
+    <!-- Online Banner Area End -->
+    <!-- Shop Info Area Start -->
+    {% include 'shop_info.html' %}
+    <!-- Shop Info Area End -->
+    <!-- Featured Product Area Start -->
+    {% include 'feature_product.html' with book_list=book_list %}
+    <!-- Featured Product Area End -->
+    <!-- Testimonial Area Start -->
+    {% include 'testimonial.html' %}
+    <!-- Testimonial Area End -->
+    <!-- Counter Area Start -->
+    {% include 'counter_area.html' %}
+    <!-- Counter Area End -->
+    <!-- Blog Area Start -->
+    {% include 'blog_area.html' %}
+    <!-- Blog Area End -->
+    <!-- News Letter Area Start -->
+    {% include 'news_letter.html' %}
+    <!-- News Letter Area End -->
+{% endblock %}
