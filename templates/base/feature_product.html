@@ -59,7 +59,7 @@
                                                 </div>
                                                 <div class="banner-bottom text-center">
                                                     <a style="cursor: pointer"
-                                                       href="{% url 'books:individual-book' book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                       href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}">{{ book.book_title }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +97,7 @@
                                                 </div>
                                                 <div class="banner-bottom text-center">
                                                     <a style="cursor: pointer"
-                                                       href="{% url 'books:individual-book' book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                       href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}">{{ book.book_title }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@
                                                 </div>
                                                 <div class="banner-bottom text-center">
                                                     <a style="cursor: pointer"
-                                                       href="{% url 'books:individual-book' book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                       href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}">{{ book.book_title }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -188,7 +188,7 @@
                                                 </div>
                                                 <div class="banner-bottom text-center">
                                                     <a style="cursor: pointer"
-                                                       href="{% url 'books:individual-book'  book_slug=book.book_slug %}">{{ book.book_title }}</a>
+                                                       href="{% url 'books:individual-book'  book_slug=book.book_slug book_isbn=book.book_isbn %}">{{ book.book_title }}</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -26,7 +26,7 @@ class LoginForm(GeneralForm):
 class RegisterForm(GeneralForm):
     password1 = forms.CharField(label="Confirm password", error_messages={'required': "please enter the password"},
                                 widget=forms.PasswordInput(
-                                        attrs={'class': 'form-control', 'placeholder': 'Renter your password'}),
+                                        attrs={'class': 'form-group', 'placeholder': 'Renter your password'}),
                                 required=True,
                                 )
 
@@ -41,7 +41,7 @@ class RegisterForm(GeneralForm):
                                 error_messages={'required': "please enter the last name"}, )
 
     email = forms.EmailField(label="Email", widget=forms.EmailInput(
-            attrs={'class': 'form-control', 'placeholder': 'Enter your mail'}),
+            attrs={'class': 'form-group', 'placeholder': 'Enter your mail'}),
                              required=True,
                              error_messages={'required': "please enter the mail"}, )
 
@@ -76,17 +76,17 @@ class RegisterForm(GeneralForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    first_name = forms.CharField(label="", required=True, widget=forms.TextInput(
-            attrs={'class': "form-control col-md-12", 'id': "first_name", 'placeholder': "Enter First name",
+    first_name = forms.CharField(required=True, widget=forms.TextInput(
+            attrs={'class': "form-row", 'id': "first_name", 'placeholder': "Enter First name",
                    'name': "first_name"}), )
-    last_name = forms.CharField(label="", required=True, widget=forms.TextInput(
-            attrs={'class': "form-control col-md-12", 'id': "last_name", 'placeholder': "Enter Last name",
+    last_name = forms.CharField(required=True, widget=forms.TextInput(
+            attrs={'class': "form-row", 'id': "last_name", 'placeholder': "Enter Last name",
                    'name': "last_name"}))
-    username = forms.CharField(label="", required=True, widget=forms.TextInput(
-            attrs={'class': "form-control col-md-12", 'id': "username", 'placeholder': "Enter username",
+    username = forms.CharField(required=True, widget=forms.TextInput(
+            attrs={'class': "form-row", 'id': "username", 'placeholder': "Enter username",
                    'name': "username"}))
-    email = forms.EmailField(label="", required=True, widget=forms.EmailInput(
-            attrs={'class': "form-control col-md-12", 'id': "email", 'placeholder': "Enter email",
+    email = forms.EmailField(required=True, widget=forms.EmailInput(
+            attrs={'class': "form-row", 'id': "email", 'placeholder': "Enter email",
                    'name': "email"}))
 
     class Meta:
@@ -99,7 +99,7 @@ class ProfileUpdateFrom(forms.ModelForm):
         model = Profile
         fields = ['image']
         labels = {
-                'image': ""
+                'image': "Upload Profile Picture"
         }
 
     def save(self, commit=True):

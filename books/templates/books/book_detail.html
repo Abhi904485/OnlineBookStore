@@ -220,7 +220,7 @@
                                         </div>
                                     </div>
                                     <div class="banner-bottom text-center">
-                                        <a href="{% url 'books:individual-book' book_slug=book_related.b.book_slug %}">{{ book_related.b.book_title }}</a>
+                                        <a href="{% url 'books:individual-book' book_slug=book_related.b.book_slug book_isbn=book_related.b.book_isbn %}">{{ book_related.b.book_title }}</a>
                                     </div>
                                 </div>
                             </div>

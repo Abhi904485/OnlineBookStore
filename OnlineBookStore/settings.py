@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import dj_database_url
 from django.contrib.messages import constants as messages
+from decouple import config, Csv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -21,12 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'oe%o0c39s^%97z5auizpi-*56iesk7^q0*@0=e(@_+9)r0w*!c'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 
@@ -41,7 +43,7 @@ INSTALLED_APPS = [
         'livereload',
         'django.contrib.staticfiles',
         'debug_toolbar',
-        'accounts',
+        'accounts.apps.AccountsConfig',
         'cart',
         'billing',
         'tags',
@@ -50,7 +52,8 @@ INSTALLED_APPS = [
         'rest_framework',
         'django_filters',
         'contact',
-        'about'
+        'about',
+        'social_django',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +65,9 @@ MIDDLEWARE = [
         'django.contrib.messages.middleware.MessageMiddleware',
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
         'livereload.middleware.LiveReloadScript',
-        'debug_toolbar.middleware.DebugToolbarMiddleware'
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'social_django.middleware.SocialAuthExceptionMiddleware',
+        'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'OnlineBookStore.urls'
@@ -89,6 +94,8 @@ TEMPLATES = [
                                 'django.template.context_processors.request',
                                 'django.contrib.auth.context_processors.auth',
                                 'django.contrib.messages.context_processors.messages',
+                                'social_django.context_processors.backends',
+                                'social_django.context_processors.login_redirect',
                         ],
                 },
         },
@@ -100,10 +107,7 @@ WSGI_APPLICATION = 'OnlineBookStore.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-        'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+        'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
 
 # Password validation
@@ -160,18 +164,31 @@ MESSAGE_TAGS = {
         messages.WARNING: 'warning'
 }
 
-CRISPY_TEMPLATE_PACK = "bootstrap4"
+CRISPY_TEMPLATE_PACK = config('CRISPY_TEMPLATE_PACK', default='bootstrap4')
 
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
+        'social_core.backends.github.GithubOAuth2',
+        'social_core.backends.twitter.TwitterOAuth',
+        'social_core.backends.facebook.FacebookOAuth2',
 )
 
 LOGOUT_REDIRECT_URL = '/account/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'pstzmm@gmail.com'
-EMAIL_HOST_PASSWORD = 'novell@123'
-EMAIL_PORT = 587
+LOGOUT_URL = '/account/logout'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+# EMAIL_USE_TLS = True
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT', cast=int)
+SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
+SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
+SOCIAL_AUTH_TWITTER_KEY = config('SOCIAL_AUTH_TWITTER_KEY')
+SOCIAL_AUTH_TWITTER_SECRET = config('SOCIAL_AUTH_TWITTER_SECRET')
+STATICFILES_STORAGE = config('STATICFILES_STORAGE')

@@ -1,5 +1,4 @@
 import requests
-from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework import status
@@ -13,7 +12,6 @@ def home(request):
             book['r'] = range(int(book['book_rating']))
             book['n'] = range(5 - int(book['book_rating']))
             final_book_list.append(book)
-        print(final_book_list)
         context = {
                 'book_list': final_book_list
         }
@@ -95,6 +93,7 @@ def single_book_modal(request, book_slug):
             .replace('csrf_token?', csrf_token)
 
         return JsonResponse(data=msg, status=status.HTTP_200_OK, safe=False)
+    return render(request, '404.html')
 
 
 def featured_book(request):
@@ -108,7 +107,7 @@ def featured_book(request):
     return render(request, '404.html', context={'error': "Method not allowed"})
 
 
-def individual_book(request, book_slug):
+def individual_book(request, book_slug, book_isbn):
     final_related_book_list = []
     if request.method == "GET":
         book = requests.get('http://localhost:8000/api/v1/{}/rb/'.format(book_slug)).json()
@@ -126,5 +125,25 @@ def individual_book(request, book_slug):
             final_related_book_list.append(related_book_dict)
         context['related_book'] = final_related_book_list
         return render(request, 'book_detail.html', context=context)
+
+    return render(request, '404.html', context={'error': "Method not allowed"})
+
+
+def wishlist(request):
+    context = {}
+    return render(request, 'wishlist.html', context=context)
+
+
+def shop(request):
+    if request.method == "GET":
+        final_book_list = []
+        book_list = requests.get('http://localhost:8000/api/v1/lb').json()
+        for book in book_list:
+            book['r'] = range(int(book['book_rating']))
+            book['n'] = range(5 - int(book['book_rating']))
+            final_book_list.append(book)
+        context = {'book_list': final_book_list}
+        print(context)
+        return render(request, 'shop.html', context=context)
 
     return render(request, '404.html', context={'error': "Method not allowed"})

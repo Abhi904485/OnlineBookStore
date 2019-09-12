@@ -3,6 +3,74 @@
 
 
 {% block content %}
+    <style type="text/css">
+        body {
+            background-color: floralwhite;
+        }
+
+        .login-form {
+            width: 500px;
+            margin: 30px auto;
+        }
+
+        .login-form form {
+            margin-bottom: 15px;
+            background: #f7f7f7;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        .login-form h2 {
+            margin: 0 0 15px;
+        }
+
+        .login-form .hint-text {
+            color: #777;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-control, .btn {
+            min-height: 38px;
+            border-radius: 2px;
+        }
+
+        .login-btn {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .or-seperator {
+            margin: 20px 0 10px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+        }
+
+        .or-seperator i {
+            padding: 0 10px;
+            background: #f7f7f7;
+            position: relative;
+            top: -11px;
+            z-index: 1;
+        }
+
+        .social-btn .btn {
+            margin: 10px 0;
+            font-size: 15px;
+            text-align: left;
+            line-height: 24px;
+        }
+
+        .social-btn .btn i {
+            float: left;
+            margin: 4px 15px 0 5px;
+            min-width: 15px;
+        }
+
+        .input-group-addon .fa {
+            font-size: 18px;
+        }
+    </style>
     <div class="breadcrumbs-area">
         <div class="container">
             <div class="row">
@@ -21,34 +89,32 @@
         </div>
     </div>
     <div class="container">
-        <br/>
-        <div class="text-center">
-            <h2>Login Form</h2>
-        </div>
-        <div class="row">
-            <div class="col">
-                <form method="POST">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Login Form</legend>
-                        {{ form| crispy }}
-                    </fieldset>
+        <div class="login-form">
+            <form method="post">
+                {% csrf_token %}
+                <h2 class="text-center">Sign in</h2>
+                <div class="text-center social-btn">
+                    <a href="{% url 'social:begin' 'github' %}" class="btn btn-primary btn-block"><i
+                            class="fa fa-github"></i> Sign in with <b>Github</b></a>
+                    <a href="{% url 'social:begin' 'twitter' %}" class="btn btn-info btn-block"><i
+                            class="fa fa-twitter"></i> Sign in with <b>Twitter</b></a>
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-danger btn-block"><i
+                            class="fa fa-facebook"></i> Sign in with <b>Facebook</b></a>
+                </div>
+                <div class="or-seperator"><i>or</i></div>
+                {{ form| crispy }}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info btn-block">Submit</button>
+                </div>
+                <div class="clearfix">
+                    <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                    <a href="{% url 'account:password_reset' %}" class="pull-right text-success">Forgot
+                        Password?</a>
+                </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-info">Submit</button>
-                        <small class="text-muted ml-2"><a href="{% url 'account:password_reset' %}"> Forgot
-                            password? </a>
-                        </small>
-                    </div>
-                    <div class="border-top pt-3 text-center">
-                        <p class="small text-muted"><a href="{% url "account:register" %}"
-                                                       class="ml-2">Need an Account ? Sign
-                            up</a></p>
-                    </div>
-
-                </form>
-
-            </div>
+            </form>
+            <div class="hint-text small">Don't have an account? <a href="{% url "account:register" %}"
+                                                                   class="text-success">Register Now!</a></div>
         </div>
     </div>
 

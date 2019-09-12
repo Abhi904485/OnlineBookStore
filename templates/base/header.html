@@ -87,9 +87,11 @@
                     <nav>
                         <ul id="nav">
                             <li><a href="{% url 'books:home' %}">HOME</a></li>
+                            <li><a href="{% url 'books:shop' %}">SHOP</a></li>
                             <li><a href="{% url 'books:featured-book' %}">FEATURED</a></li>
                             <li><a href="{% url 'about:about-home' %}">ABOUT US</a></li>
                             <li><a href="{% url 'contact:contact-home' %}">CONTACT</a></li>
+                            <li><a href="{% url 'books:wishlist' %}">WISHLIST</a></li>
                             {% if user.is_authenticated %}
                                 <li><a href="{% url 'account:logout' %}">Logout</a></li>
                             {% else %}
@@ -104,7 +106,7 @@
                 <div class="header-right">
                     <ul>
                         <li>
-                            <a href="#"><i class="flaticon-people"></i></a>
+                            <a href="{% url 'account:profile' %}"><i class="flaticon-people"></i></a>
                         </li>
                         <li class="shoping-cart">
                             <a href="#">

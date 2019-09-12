@@ -75,6 +75,11 @@ class Books(models.Model):
                                      null=False, default=0.00, max_digits=10, decimal_places=2,
                                      db_column='book_price',
                                      error_messages={'required': 'book Price is required'}, )
+    book_price_new = models.DecimalField(verbose_name="Book price New", help_text="New price of the book",
+                                         blank=False,
+                                         null=False, default=0.00, max_digits=10, decimal_places=2,
+                                         db_column='book_price_new',
+                                         error_messages={'required': 'New book Price is required'}, )
     book_image = models.ImageField(verbose_name="image name", null=False, blank=False,
                                    help_text="image of the book", db_column='book_image',
                                    error_messages={'required': 'please upload book image'},

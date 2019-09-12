@@ -20,6 +20,7 @@ from django.urls import include, path
 from django.conf.urls import url
 
 from OnlineBookStore import settings
+from django.contrib.auth import views as auth_view
 
 urlpatterns = [
         path('admin/', admin.site.urls),
@@ -28,7 +29,7 @@ urlpatterns = [
         url(r'^contact/', include('contact.urls', namespace="contact")),
         url(r'^account/', include('accounts.urls', namespace="account")),
         url(r'^cart/', include('cart.urls', namespace="cart")),
-
+        url(r'^oauth/', include('social_django.urls', namespace='social')),
 
 ]
 
