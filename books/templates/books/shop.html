@@ -110,7 +110,8 @@
                                                 <img width="50px" height="50px" src="{{ book.book_image }}" alt=""/>
                                             </div>
                                             <div class="seller-details">
-                                                <a href="#"><h5>{{ book.book_title }}</h5></a>
+                                                <a href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}">
+                                                    <h5>{{ book.book_title }}</h5></a>
                                                 <h5>$ {{ book.book_price }}</h5>
                                                 <ul>
                                                     {% for rating in book.r %}
@@ -181,7 +182,8 @@
                                         <div class="col-md-4 col-sm-6">
                                             <div class="single-banner">
                                                 <div class="product-wrapper">
-                                                    <a href="#" class="single-banner-image-wrapper">
+                                                    <a href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}"
+                                                       class="single-banner-image-wrapper">
                                                         <img alt="{{ book.book_title }} logo"
                                                              src="{{ book.book_image }}">
                                                         <div class="price"><span>$</span> {{ book.book_price }}</div>
@@ -204,7 +206,7 @@
                                                 </div>
                                                 <div class="banner-bottom text-center">
                                                     <div class="banner-bottom-title">
-                                                        <a href="#">{{ book.book_title }}</a>
+                                                        <a href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}">{{ book.book_title }}</a>
                                                     </div>
                                                     <div class="rating-icon">
                                                         {% for rating in book.r %}
@@ -226,7 +228,7 @@
                                         <div class="single-shop-product">
                                             <div class="col-xs-12 col-sm-5 col-md-4">
                                                 <div class="left-item">
-                                                    <a href="#"
+                                                    <a href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}"
                                                        title="{{ book.book_title }}">
                                                         <img src="{{ book.book_image }}"
                                                              alt="{{ book.book_title }} logo"/>
@@ -236,7 +238,7 @@
                                             <div class="col-xs-12 col-sm-7 col-md-8">
                                                 <div class="deal-product-content">
                                                     <h4>
-                                                        <a href="#"
+                                                        <a href="{% url 'books:individual-book' book_slug=book.book_slug book_isbn=book.book_isbn %}"
                                                            title="East of ede#">{{ book.book_title }}</a>
                                                     </h4>
                                                     <div class="product-price">

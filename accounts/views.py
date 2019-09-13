@@ -58,7 +58,7 @@ def register_page(request):
                 'token': account_activation_token.make_token(user),
         })
         user.email_user(subject, message)
-        return redirect('account:account_activation_sent')
+        return redirect('account_activation_sent')
     return render(request, "register.html", context=context)
 
 

@@ -133,7 +133,7 @@ class Books(models.Model):
         return self.book_title
 
     def get_absolute_url(self):
-        return reverse('books:detail', kwargs={'book_slug': self.book_slug})
+        return reverse('books:individual-book', kwargs={'book_slug': self.book_slug, 'book_isbn': self.book_isbn})
 
     @property
     def name(self):

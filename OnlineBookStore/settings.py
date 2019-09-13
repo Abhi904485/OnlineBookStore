@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import dj_database_url
 from django.contrib.messages import constants as messages
-from decouple import config, Csv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -23,12 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'oe%o0c39s^%97z5auizpi-*56iesk7^q0*@0=e(@_+9)r0w*!c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -67,7 +65,6 @@ MIDDLEWARE = [
         'livereload.middleware.LiveReloadScript',
         'debug_toolbar.middleware.DebugToolbarMiddleware',
         'social_django.middleware.SocialAuthExceptionMiddleware',
-        'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'OnlineBookStore.urls'
@@ -97,7 +94,13 @@ TEMPLATES = [
                                 'social_django.context_processors.backends',
                                 'social_django.context_processors.login_redirect',
                         ],
+                        'libraries': {
+
+                                'form_tags': 'accounts.templatetags.form_tags',
+
+                        }
                 },
+
         },
 ]
 
@@ -107,7 +110,10 @@ WSGI_APPLICATION = 'OnlineBookStore.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-        'default': dj_database_url.config(default=config('DATABASE_URL'))
+        'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
 }
 
 # Password validation
@@ -164,7 +170,7 @@ MESSAGE_TAGS = {
         messages.WARNING: 'warning'
 }
 
-CRISPY_TEMPLATE_PACK = config('CRISPY_TEMPLATE_PACK', default='bootstrap4')
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
@@ -178,17 +184,16 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login'
 LOGOUT_URL = '/account/logout'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = True
-EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=True, cast=bool)
-EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
-SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
-SOCIAL_AUTH_FACEBOOK_KEY = config('SOCIAL_AUTH_FACEBOOK_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = config('SOCIAL_AUTH_FACEBOOK_SECRET')
-SOCIAL_AUTH_TWITTER_KEY = config('SOCIAL_AUTH_TWITTER_KEY')
-SOCIAL_AUTH_TWITTER_SECRET = config('SOCIAL_AUTH_TWITTER_SECRET')
-STATICFILES_STORAGE = config('STATICFILES_STORAGE')
+EMAIL_USE_SSL = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pstzmm@gmail.com'
+EMAIL_HOST_PASSWORD = 'novell@123'
+EMAIL_PORT = 465
+SOCIAL_AUTH_GITHUB_KEY = '819b4bf739ad18f715ab'
+SOCIAL_AUTH_GITHUB_SECRET = '4219bc5e1bf453c728821579ba73f748cdfa10be'
+SOCIAL_AUTH_FACEBOOK_KEY = '2340315799560139'
+SOCIAL_AUTH_FACEBOOK_SECRET = '213cef8dff965db877547da35b279338'
+SOCIAL_AUTH_TWITTER_KEY = '5FfvRb1N9cPyj9QZ2NGLjlmxC'
+SOCIAL_AUTH_TWITTER_SECRET = 'qCxb3F4CEud59zE3zHazJJtuGrqSLXbLVIDgpx9Mr0ViGU5hwU'

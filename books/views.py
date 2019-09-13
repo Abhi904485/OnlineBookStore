@@ -143,7 +143,6 @@ def shop(request):
             book['n'] = range(5 - int(book['book_rating']))
             final_book_list.append(book)
         context = {'book_list': final_book_list}
-        print(context)
         return render(request, 'shop.html', context=context)
 
     return render(request, '404.html', context={'error': "Method not allowed"})

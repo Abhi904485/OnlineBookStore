@@ -80,8 +80,15 @@
                         </div>
                         <p>{{ book.book_description }}</p>
                         <div class="single-product-price">
-                            <h2>$ {{ book.book_price }}</h2>
+                            <h2>
+                                <del style="color: red">$ {{ book.book_price }}</del>
+                            </h2>
+
                         </div>
+                        <div class="single-product-price">
+                            <h2 style="color: green">$ {{ book.book_price_new }}</h2>
+                        </div>
+                        <br/>
                         <div class="product-attributes clearfix">
                                 <span class="pull-left" id="quantity-wanted-p">
 									<span class="dec qtybutton">-</span>
